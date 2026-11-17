@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-deep-black: #080b12;
+  --color-midnight: #111827;
+  --color-electric: #1677ff;
+  --color-cyan: #22d3ee;
+  --color-silver: #c7d0dc;
+  --color-white: #ffffff;
+  --font-display: var(--font-orbitron);
+  --font-body: var(--font-manrope);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-deep-black);
+    color: var(--color-white);
+    font-family: var(--font-body), system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-electric) 45%, transparent);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.02)
+    );
+    border: 1px solid rgba(199, 208, 220, 0.14);
+    backdrop-filter: blur(16px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(120deg, #ffffff 10%, #22d3ee 50%, #1677ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-blue {
+    box-shadow:
+      0 0 0 1px rgba(22, 119, 255, 0.25),
+      0 10px 40px rgba(22, 119, 255, 0.18);
+  }
+
+  .section-pad {
+    @apply px-4 py-20 sm:px-6 lg:px-8 lg:py-28;
+  }
+
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl;
+  }
+}
+
+@keyframes circuit-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-circuit {
+  animation: circuit-pulse 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.loader-ring {
+  animation: loader-spin 1.4s linear infinite;
+}
+
+.loader-path {
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  animation: loader-dash 1.4s ease-in-out infinite;
+}
+
+.shimmer-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 211, 238, 0.45),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-circuit,
+  .animate-float,
+  .loader-ring,
+  .loader-path,
+  .shimmer-line {
+    animation: none !important;
+  }
+}
